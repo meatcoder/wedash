@@ -8,6 +8,32 @@ Note that this fork is currently a WIP and mostly identical to **wego** for now.
 
 ![Screenshots](http://schachmat.github.io/wego/wego.gif)
 
+## Dev Setup and Build Instructions
+
+This program uses a nix flake based dev setup. It requires that nix flakes be setup and installed. The instructions for doing so can be found here: 
+
+- Nix install guide: https://nixos.wiki/wiki/Nix_Installation_Guide
+- Nix flakes config guide: https://nixos.wiki/wiki/Flakes
+- Install and configure direnv using the most convenient method for you: https://direnv.net/docs/installation.html
+
+Once you have enabled nix, the following will setup the dev environment:
+
+1. Clone the repo with the following command:
+
+    `git clone https://github.com/meatcoder/wedash.git`
+
+2. Change into the directory with the following command:
+
+    `cd wedash`
+
+3. Enable direnve with: `direnv allow`. This will automatically build the dev environment. This will take some time, please allow it to finish.
+
+4. Build the app using: `nix build`. The resulting binary should now be: `result/bin/wedash`.
+
+## Updating Dependencies in Nix
+
+If you add any new go dependencies, you will need to tell nix about them by updating the `gomod2nix.toml` file. Running the `gomod2nix` command should update that file from the changes made in the `go.mod` file. 
+
 ## Features
 
 * show forecast for 1 to 7 days
@@ -21,15 +47,6 @@ Note that this fork is currently a WIP and mostly identical to **wego** for now.
 * multi language support
 * config file for default location which can be overridden by commandline
 * Automatic config management with [ingo](https://github.com/schachmat/ingo)
-
-## Dependencies
-
-* A [working](https://golang.org/doc/install#testing) [Go](https://golang.org/)
-  [1.20](https://golang.org/doc/go1.20) environment 
-* utf-8 terminal with 256 colors
-* A monospaced font containing all the required runes (I use `dejavu sans
-  mono`)
-* An API key for the backend (see Setup below)
 
 ## Installation
 
