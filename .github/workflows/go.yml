@@ -13,13 +13,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.20
+    - name: Setup nix
+      uses: cachix/install-nix-action@v22
+
+    - name: Flake setup
+      run: nix build
+    - run: nix flake check
 
     - name: Build
-      run: go build -v ./...
+      run: nix develop --command nix build
 
     - name: Test
-      run: go test -v ./...
+      run: nix develop --command go test -v ./...
